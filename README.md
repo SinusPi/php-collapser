@@ -11,37 +11,38 @@ This tool prints - as an HTML table - a given object or array, recursively, opti
  
 Use:
 
-		  $tc = new Collapser([
-        'classes'=>[
-            'name-of-class'=>[
-                'arrayfier'=>function($obj,&$array) {  // convert the object into an array, without recursion, however you like
-                    return ['header'=>"Custom Name Of Object, optional"]
-                },
-					           'collapse'=>[  // collapse several fields into one, keeping original contents intact for inspection
-              						[
-							                 'input'=>["first_name","last_name"],
-							                 'output'=>"name",
-							                 'format'=>"%s %s", // display as John Doe
-                        // or
-                        'formatter'=>function(&$vals) { return sprintf("%s. %s",substr($vals['first_name'],0,1),$vals['last_name']); } // display as J. Doe
-						              ],
-                ],
-           					'format'=>[   // just reformat a field, replacing the original.
-						              [
-							                 'field'=>"flags",
-                        'format'=>"...",
-                        // or
-							                 'formatter'=>function(&$vals) { return "..."; }
-						              ]
-					           ]
-           					'groups'=>[   // group fields into sections
-						              'main'=>["account_code","username","name","email","state"],
-					           ],
+    $tc = new Collapser([
+      'classes'=>[
+        'name-of-class'=>[
+          'arrayfier'=>function($obj,&$array) {  // convert the object into an array, without recursion, however you like
+            return ['header'=>"Custom Name Of Object, optional"]
+          },
+          'collapse'=>[  // collapse several fields into one, keeping original contents intact for inspection
+            [
+	      'input'=>["first_name","last_name"],
+              'output'=>"name",
+              'format'=>"%s %s", // display as John Doe
+              // or
+              'formatter'=>function(&$vals) { return sprintf("%s. %s",substr($vals['first_name'],0,1),$vals['last_name']); } // display as J. Doe
             ],
-        ]
+          ],
+          'format'=>[   // just reformat a field, replacing the original.
+            [
+              'field'=>"flags",
+              'format'=>"...",
+              // or
+              'formatter'=>function(&$vals) { return "..."; }
+            ]
+          ],
+          'groups'=>[   // group fields into sections
+            'main'=>["account_code","username","name","email","state"],
+          ],
+        ],
+      ],
     ]);
     $tc->show($object);
 
 
 TO DO:
 - first convert the object into a tree data structure, and only then display it in HTML table form (or any other form, make it extendable).
+- finish Identifiers - support for functions detecting arrays as "objects" by their contents
