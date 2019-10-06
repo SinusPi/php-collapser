@@ -19,7 +19,7 @@ Use:
           },
           'collapse'=>[  // collapse several fields into one, keeping original contents intact for inspection
             [
-	      'input'=>["first_name","last_name"],
+              'input'=>["first_name","last_name"],
               'output'=>"name",
               'format'=>"%s %s", // display as John Doe
               // or
